@@ -1,0 +1,127 @@
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+      <title>User Information Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<script>'undefined' === typeof _trfq || (window._trfq = []); 'undefined' === typeof _trfd && (window._trfd = []), _trfd.push({ 'tccl.baseHost': 'secureserver.net' }, { 'ap': 'cpbh-mt' }, { 'server': 'p3plmcpnl487010' }, { 'dcenter': 'p3' }, { 'id': '8437534' }) // Monitoring performance to make your website faster.  
+    {% comment %} If you want to opt - out, please contact web hosting support. {% endcomment %}
+ </script>
+<script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
+<script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script>
+
+</html>
+
+<body align= "center" style = "background-image: url('{% static 'images/R.jpg' %}');">
+    <h2>Measurment Page For Solar Cell IV Curve</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>GIVE PARAMETERS FOR SOLAR CELL</p>
+         Start: <input type="number" step="any" name="r1" value='{% if submitbutton == "Submit" %} {{ r1 }} {% endif %}' /><br><br>
+         Stop: <input type="number" step="any" name="r2" value='{% if submitbutton == "Submit" %} {{ r2 }} {% endif %}' /><br><br> 
+         StepSize: <input type="number" step="0.01" name="nv" value='{% if submitbutton == "Submit" %} {{ nv }} {% endif %}' /><br><br> 
+         Ideality Factor: <input type="number" step="any" name="n" value='{% if submitbutton == "Submit" %} {{ n }} {% endif %}' /><br><br> 
+         Reverse Saturation Current (in e-12): <input type="number" step="any" name="I0" value='{% if submitbutton == "Submit" %} {{ I0 }} {% endif %}' /><br><br>
+         <p>ASSUMED PARAMETERS:</p>
+         
+         <p>Photo Current(in A):2e-3</p> 
+         
+         <p>Temperature(in Kelvin):300</p> 
+         
+         <p>Electron Charge(in coulombs):1.6e-19</p> 
+         
+         <p>Boltzman Constant(in Joules/Kelvin):1.38e-23</p> 
+         
+            <p>Click below!</p>
+        <input type="Submit" name="Submit" value="Generate Graph" />
+
+    </form>
+
+    {% if submitbutton == "Generate Graph" %}
+    <img src="data:image/png;base64,{{image}}">
+    <div id="contentToPrint">
+        {{ csv|safe }}
+    </div>
+    
+    <button type="button" onclick="getURL()">Download Graph</button>
+    <button type="button" onclick="tableToCSV()">Download CSV</button>
+    {%endif%}
+    <script>
+
+function downloadObject(file_name, file_ext, blob_data){
+            var temp_link = document.createElement('a');
+
+            // Download csv file
+            temp_link.download = file_name + file_ext;
+            var url = window.URL.createObjectURL(blob_data);
+            temp_link.href = url;
+
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+
+            // Automatically click the link to
+            // trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
+        async function getURL() {
+            ele = document.querySelector('img')
+            res = await fetch(ele.src);
+            blb = await res.blob();
+            // url =  URL.createObjectURL(blb);
+            downloadObject('graph', '.png', blb)
+        }
+
+        function tableToCSV() {
+
+            // Variable to store the final csv data
+            var csv_data = [];
+
+            // Get each row data
+            var rows = document.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+
+                // Get each column data
+                var cols = rows[i].querySelectorAll('td,th');
+
+                // Stores each csv row data
+                var csvrow = [];
+                for (var j = 0; j < cols.length; j++) {
+
+                    // Get the text data of each cell
+                    // of a row and push it to csvrow
+                    csvrow.push(cols[j].innerHTML);
+                }
+
+                // Combine each column value with comma
+                csv_data.push(csvrow.join(","));
+            }
+
+            // Combine each row data with new line character
+            csv_data = csv_data.join('\n');
+
+            // Call this function to download csv file 
+            downloadCSVFile(csv_data);
+
+        }
+
+
+        function downloadCSVFile(csv_data) {
+
+            // Create CSV file object and feed
+            // our csv_data into it
+            CSVFile = new Blob([csv_data], {
+                type: "text/csv"
+            });
+            downloadObject('readings', '.csv', CSVFile)
+            // Create to temporary link to initiate
+            // download process
+            
+        }
+    </script>
+
+
+</body> 
