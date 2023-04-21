@@ -41,8 +41,59 @@ def Equipments(request):
 
 def Option_1(request):
     print("Hello")
-    start_value = float(request.POST.get('r1')or 0.1) 
-    
+    start= float(request.POST.get('s1')or 0.1) 
+    end = float(request.POST.get('s2')or 0.1)
+    value = float(request.POST.get('v')or 0.1)
+    # path = open("Readings(x,y).csv", "w")  # open csv file
+    # rm = visa.ResourceManager()
+    # B2901B = rm.open_resource('USB0::0x2A8D::0x9001::MY60440157::0::INSTR')
+    # idn = B2901B.query('*IDN?')
+    # print(idn)
+    # B2901B.write('*RST')
+    # B2901B.write(':OUTPut:STATe %d' % (1))
+    # response = dict()
+    # values= np.linspace(start, end, value)
+    # response={}
+    # for i in values:
+    #     B2901B.write(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %G' % (i))
+    #     B2901B.write(':FORMat:DATA %s' % ('ASCii'))
+    #     temp_values = B2901B.query_ascii_values(':MEASure:CURRent:DC?')
+    #     response[i]=temp_values
+    # #response["V"] = response["V"].append(i)
+    # B2901B.write('*RST')
+    # z = csv.writer(path)
+    # for x, y in response.items():  # write data into csv file
+    #     z.writerow([x, y])
+
+    # path.close()
+    # df = pd.read_csv('Readings(x,y).csv', header=None)
+    # df.rename(columns={0: 'X', 1: 'Y'}, inplace=True)  # header names
+    # df.to_csv('Readings(x,y).csv', index=False)
+    # # ----PLOTTING----
+    # # plt.rcParams["figure.figsize"] = [7.00, 3.50]
+    # # plt.rcParams["figure.autolayout"] = True
+    # columns = ["X", "Y"]
+    # df = pd.read_csv("Readings(x,y).csv", usecols=columns)
+    # print("Contents in csv file:\n", df)
+
+    # plt.xlabel('Voltage (v)->')
+    # plt.ylabel('Current (I)->')
+    # plt.title("IV Graph")
+    # plt.plot(df.X, df.Y)
+    # plt.plot(response["V"], response["I"])
+    # s = BytesIO()
+    # plt.savefig(s)
+    # b64 = base64.b64encode(s.getvalue()).decode()
+    # s_csv= BytesIO()
+    # df.to_csv(s_csv)
+    # b64_csv = base64.b64encode(s_csv.getvalue()).decode()
+
+    # submitbutton = request.POST.get('Submit')
+    # # x = df.to_html()
+    # context = {
+    #            'image': b64,
+    #            #'csv': df.to_html(),
+    #            'submitbutton': submitbutton}
     return render(request,"Option_1.html")
 
 def test(request):
