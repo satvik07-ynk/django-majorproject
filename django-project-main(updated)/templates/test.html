@@ -1,5 +1,68 @@
+{% extends 'base.html' %}
 <html lang="en">
     {% load static %}
+    
+    {% block title %}Home{% endblock %}
+    
+    {% block content %}
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+    
+          <!-- Collapsible wrapper -->
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Shivam Aggarwal
+            </button>
+            
+            <div class="dropdown-menu">
+              <button type="button" class="btn btn-link px-3 mr-1 text-theme">
+                <a href="{% url 'logout' %}">Home</a>
+            </button>
+              <a class="dropdown-item" href="/Account_Settings">Account Settings</a>
+            </div>
+          </div>
+            <!-- Left links -->
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/Equipments">Equipments</a>
+              </li>
+              <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                   <li class="nav-item">
+                      <a class="nav-link" href="/Measurements">Measurements</a>
+              </li>
+              <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                   <a class="nav-link" href="/Option_1">Option1</a>
+           </li>
+           
+              {% comment %} <div class="btn-group">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shivam Aggarwal
+                </button>
+                
+                <div class="dropdown-menu">
+                  <button type="button" class="btn btn-link px-3 mr-1 text-theme">
+                    <a href="{% url 'logout' %}">Log Out</a>
+                </button>
+                  <a class="dropdown-item" href="/Account_Settings">Account Settings</a>
+                </div>
+              </div> {% endcomment %}
+            </ul>
+          </div>
+          <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+     <br>
+     
 
 <head>
     <meta charset="UTF-8">
@@ -13,8 +76,7 @@
 <script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script>
 
 </html>
-
-<body align= "center" style = "background-image: url('{% static 'images/R.jpg' %}');">
+<body style = "background-image: url('{% static 'images/R.jpg' %}');">
     <h2>Measurment Page For Solar Cell IV Curve</h2>
     <form action="" method="POST">
         {% csrf_token %}
@@ -24,15 +86,15 @@
          StepSize: <input type="number" step="0.01" name="nv" value='{% if submitbutton == "Submit" %} {{ nv }} {% endif %}' /><br><br> 
          Ideality Factor: <input type="number" step="any" name="n" value='{% if submitbutton == "Submit" %} {{ n }} {% endif %}' /><br><br> 
          Reverse Saturation Current (in e-12): <input type="number" step="any" name="I0" value='{% if submitbutton == "Submit" %} {{ I0 }} {% endif %}' /><br><br>
-         <p>ASSUMED PARAMETERS:</p>
+         <p><b><i>ASSUMED PARAMETERS:</i></b></p>
          
-         <p>Photo Current(in A):2e-3</p> 
+         <p><b>Photo Current(in A)</b>:2e-3</p> 
          
-         <p>Temperature(in Kelvin):300</p> 
+         <p><b>Temperature(in Kelvin)</b>:300</p> 
          
-         <p>Electron Charge(in coulombs):1.6e-19</p> 
+         <p><b>Electron Charge(in coulombs):</b>1.6e-19</p> 
          
-         <p>Boltzman Constant(in Joules/Kelvin):1.38e-23</p> 
+         <p><b>Boltzman Constant(in Joules/Kelvin):</b>1.38e-23</p> 
          
             <p>Click below!</p>
         <input type="Submit" name="Submit" value="Generate Graph" />
@@ -125,3 +187,4 @@ function downloadObject(file_name, file_ext, blob_data){
 
 
 </body> 
+{% endblock %}

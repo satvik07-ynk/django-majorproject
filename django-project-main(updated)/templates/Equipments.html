@@ -1,4 +1,63 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="btn-group">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Shivam Aggarwal
+        </button>
+        
+        <div class="dropdown-menu">
+          <button type="button" class="btn btn-link px-3 mr-1 text-theme">
+            <a href="{% url 'logout' %}">Home</a>
+        </button>
+          <a class="dropdown-item" href="/Account_Settings">Account Settings</a>
+        </div>
+      </div>
+        <!-- Left links -->
+        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/Equipments">Equipments</a>
+          </li>
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link" href="/Measurements">Measurements</a>
+          </li>
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+               <a class="nav-link" href="/Option_1">Option1</a>
+       </li>
+       
+          {% comment %} <div class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Shivam Aggarwal
+            </button>
+            
+            <div class="dropdown-menu">
+              <button type="button" class="btn btn-link px-3 mr-1 text-theme">
+                <a href="{% url 'logout' %}">Log Out</a>
+            </button>
+              <a class="dropdown-item" href="/Account_Settings">Account Settings</a>
+            </div>
+          </div> {% endcomment %}
+        </ul>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
 {%load static%}
 <html>
 <style>
@@ -104,4 +163,5 @@ table, th, th {
 
 </body>
 </html>
+{%endblock%}
 

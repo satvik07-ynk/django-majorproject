@@ -38,8 +38,6 @@ class SignUpView(CreateView):
 def Equipments(request):
     return render(request, 'Equipments.html')
 
-def Option_1(request):
-    return render(request,"Option_1.html")
 
 def Option_1(request):
     return render(request,"Option_1.html")
