@@ -40,6 +40,9 @@ def Equipments(request):
 
 
 def Option_1(request):
+    print("Hello")
+    start_value = float(request.POST.get('r1')or 0.1) 
+    
     return render(request,"Option_1.html")
 
 def test(request):

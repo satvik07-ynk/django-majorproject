@@ -20,7 +20,7 @@
         {% csrf_token %}
         <p>GIVE PARAMETERS FOR SOLAR CELL</p>
          Start: <input type="number" step="any" name="r1" value='{% if submitbutton == "Submit" %} {{ r1 }} {% endif %}' /><br><br>
-         Stop: <input type="number" step="any" name="r2" value='{% if submitbutton == "Submit" %} {{ r2 }} {% endif %}' /><br><br> 
+         {% comment %} Stop: <input type="number" step="any" name="r2" value='{% if submitbutton == "Submit" %} {{ r2 }} {% endif %}' /><br><br> 
          StepSize: <input type="number" step="0.01" name="nv" value='{% if submitbutton == "Submit" %} {{ nv }} {% endif %}' /><br><br> 
          Ideality Factor: <input type="number" step="any" name="n" value='{% if submitbutton == "Submit" %} {{ n }} {% endif %}' /><br><br> 
          Reverse Saturation Current (in e-12): <input type="number" step="any" name="I0" value='{% if submitbutton == "Submit" %} {{ I0 }} {% endif %}' /><br><br>
@@ -32,7 +32,7 @@
          
          <p>Electron Charge(in coulombs):1.6e-19</p> 
          
-         <p>Boltzman Constant(in Joules/Kelvin):1.38e-23</p> 
+         <p>Boltzman Constant(in Joules/Kelvin):1.38e-23</p>  {% endcomment %}
          
             <p>Click below!</p>
         <input type="Submit" name="Submit" value="Generate Graph" />
